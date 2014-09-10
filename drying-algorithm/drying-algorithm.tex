@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -27,15 +28,24 @@ Table 10-3 p.626
 
 \begin{align*}
 E_b = R\left(\frac{\partial\ln a_w}{\partial\left(\frac{1}{T}\right)_M}\right) \rightarrow &\ln\frac{a_{w1}}{a_{w2}} = \frac{E_b}{R}\left(\frac{1}{T_1}-\frac{1}{T_2}\right)_M \\
-& \ln\frac{a_{w1}}{a_{w2}} = \frac{V_L}{RT}(P_2-P1) \\
+& \ln\frac{a_{w1}}{a_{w2}} = \frac{V_L}{RT}(P_2-P_1) \\
 \end{align*}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{pics/eps/binding_energy_1}
+\includegraphics[width=0.4\textwidth]{pics/eps/binding_energy_2}
+\end{center}
 
 \section{Glass Transition}
 Gordon Taylor: (Table 10.4 p.636)
 \[ T_g = \frac{w_1 T_{g1} + K_2 w_2 T_{g2}}{w_1 + K_2 w_2} \]
 \[ T_g = T_{g\infty} - \frac{K}{MW} \]
 
-Williams-Landel-Ferry (WLF) Equation: (p.139 L???)
+\begin{center}
+\includegraphics[width=0.3\textwidth]{pics/eps/glass_transition}
+\end{center}
+
+Williams-Landel-Ferry (WLF) Equation: (p.139 Lund)
 \[ \ln\left(\frac{n}{n_g}\right) = \frac{-C_1 (T - T_g)}{C_2 + (T - T_g)} \]
 \begin{align*}
 \text{where: } &n_g = 10^{12} Pa \cdot s \\
@@ -49,7 +59,7 @@ Finite difference (p.506 Geankoplis)
 Table 10-5 p.646
 \[ D_{eff} \approx 10^{-9} - 10^{-12} \frac{m^2}{sec} \]
 \[ D_{AVeff} = \frac{\epsilon}{\tau} D_{AV} = \frac{\epsilon}{\tau}(D_{AVD} e^{-E_c/RT}) \]
-\[ D_{ALeff} = \frac{1-\epsilon}{\tau} D_{AL} = \frac{1-\epsilon}{\tau}(D_{ALO} e^{-E_A/RT}) \]
+\[ D_{ALeff} = \frac{1-\epsilon}{\tau} D_{AL} = \frac{1-\epsilon}{\tau}(D_{ALD} e^{-E_A/RT}) \]
 \[ D_{eff} = D_o e^{-E_a/RT} \]
 \begin{align*}
 \text{where: } & D_o = 6.39 \times 10^{-8} \frac{m^2}{s} \text{ (liquid)}\\
@@ -66,10 +76,15 @@ H$_2$O Liquid: $1\times 10^{-9} m^2/s$
 \frac{D_{eff}}{D_o} = e^{-E_a/RT}\left(\frac{Ke^{-E_b/RT}}{1+Ke^{-E_b/RT}}\right) \]
 
 \section{Porosity}
-Series:
+\subsection{Series}
+\includegraphics[width=0.3\textwidth]{pics/eps/porosity_series}
 \[ D_{eff} = \frac{\epsilon}{\tau} D_v + \frac{1-\epsilon}{\tau} D_L \]
-Perpendicular:
+\subsection{Perpendicular}
+\includegraphics[width=0.3\textwidth]{pics/eps/porosity_perpendicular}
 \[ \frac{1}{D_{eff}} = \frac{1}{\frac{\epsilon}{\tau}D_V} + \frac{1}{\frac{1-\epsilon}{\tau} D_L} \]
+
+\subsection{Effective Diffusivity}
+\includegraphics[width=0.3\textwidth]{pics/eps/porosity_circular}
 
 \[ D_{AVeff} = \frac{\epsilon}{\tau} D_{AV} = \frac{\epsilon}{\tau} (D_{AVO}e^{-E_a/RT}) \frac{Ke^{-E_b/RT}}{1+Ke^{-E_b/RT}} \]
 \[ D_{ALeff} = \frac{1-\epsilon}{\tau} D_{AL} = \frac{1-\epsilon}{\tau} (D_{ALO} e^{-E_a/RT}) \frac{Ke^{E_b/RT}}{1+Ke^{E_b/RT}} \]
