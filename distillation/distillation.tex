@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+
+\newcommand{\degree}{\ensuremath{^\circ}}
+\newcommand{\e}{\ensuremath{\text{e}}}
+
+\begin{document}
+
+\title{Distillation}
+%\author{Alex Griessman}
+\date{\today}
+\maketitle
+
+Determine ? and diameter of a ? distillation column
+
+Given a feed rate of F, composition ?, enthalpy of feed stream and composition of ? $x_D, x_W$
+Given $F$, $x_F$, $x_D$, $x_W$
+Determine $D$, $W$
+
+\[F = D+W\]
+\[F x_F = D x_D + W x_W\]
+Reflux stream:
+\[R = \frac{L}{D}\]
+
+Determine equilibrium line
+given: $P_A$, $P_B$, $\alpha = \frac{P}{B}$
+
+Feed enthalpy
+\[q = \frac{H_V - H_F}{H_V-H_L}\]
+\[y = \frac{\alpha A}{1-(\alpha-1)A}\]
+Slope of a line = $\frac{q}{q-1}$
+
+Determine operating line equation
+
+Enriching
+\[y_{n+1} = \frac{L_n}{V_{n+1}}x_n+\frac{Dx_D}{V_{n+1}}\]
+Reflux Ratio where $R = L/D$
+\[y_{n+1} = \frac{R}{R+1}x_n + \frac{X_D}{R+1}\]
+
+Stripping
+\[y_{m+1} = \frac{Lm}{V_{m+1}}x_m - \frac{Wx_w}{V_{m+1}}\]
+\[L_m = L_n + qF\]
+\[V_n = F_m + (1-q)F\]
+
+Determine operating reflux ratio $R=L/D$ or $\left(\frac{L}{V}\right)_min$ of enriching section
+\[\left(\frac{L}{V}\right)_min = \frac{R_m}{R_m+1}\]
+\[R_{op} = 1.5 R_{min}\]
+
+Given operating line equations and feed intersection
+
+Determine number of stages
+Calculate ? operating equation and equilibrium
+Step off stages
+
+See Section 10.6, page 657, Table 10.6-5 in Geankoplis
+
+where: \[\Delta P_{flood} = 2.0 ? = 0.115 \underbrace{F_p^{.7}}_{\text{Packing Factor}}\]Determine ? from Fig. 10.6-8 p658
+\[? = 1/2 ?\]
+
+?
+
+Determine Diameter of colum for tray
+Determine flooding velocity
+\[v_{max} = Kv\left(\frac{?}{20}\right)^{0.2}\left(\sqrt{\frac{\rho_L-\rho_V}{\rho_V}}\right)\]
+where ? is surface tension in dyn/cm $\left(\frac{mN}{?}\right)$
+? = 70 dyn/cm (water)
+
+Determine ? of a randomly packed column
+Number of stage: NTP
+\[\text{Height} = (NTP)(HETP)\]
+\begin{align}
+HETP &= 0.0180 dp, dp: \text{Packing diameter, SI units}\\
+     &= 1.5 dp, dp: \text{Packing diameter, English units}
+\end{align}
+
+\[dp \le 10 D_{column}\]
+select pack from Table 10.6-1
+
+Determine heat/cooling duty on reboiler/condenser.
+
+\end{document}
+

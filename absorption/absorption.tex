@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+
+\newcommand{\degree}{\ensuremath{^\circ}}
+\newcommand{\e}{\ensuremath{\text{e}}}
+
+\begin{document}
+
+\title{Gas-Liquid Separation}
+%\author{Alex Griessman}
+\date{\today}
+\maketitle
+
+Absorption of EtOH from CO$_2$ with H$_2$O
+0.2 mole percent remove 90\% EtOH
+
+Determine:
+\begin{description}
+\item[$L$] water flow
+\item[$x_{AN}$] outlet ethanol concentration of water
+\item[$D$] diameter of column
+\item[$R$] ? of column
+\end{description}
+
+Overall balance:
+\[L_0 + V_{N+1} = L_N+V_1\]
+\[L_0 x_{?0} + V_{N+1} y_{AN+1} = L_N x_{An} + V_1 y_{A1}\]
+
+for stage n
+\[L_0 x_0 + V_{n+1} y_{n+1} = L_n x_n + V_1 y_1\]
+Operating line:
+\[y_{?n+1} = \frac{L_n x_n}{V_{n+1}} + \frac{V_1 y_1 - L_0 x_0}{v_{n+1}}\]
+Equilibrium line:
+\[y_A = ?'x_A\]
+
+Diameter of column (trial and error)
+?) For ? packing, determine $\Delta P_{flood}$
+\[\Delta P = 0.115 F_p^{0.7}, for 9<F_D<60\]
+$F_p$: packing factor: See Table 10.6-1, 10.6-2
+$F_p>60$:
+\[\Delta P = 2.0? H_2O/ft\]
+
+Figure 10.6-5
+\[V_G \left(\frac{\rho_G}{\rho_L-\rho_G}\right)^{0.5} F_p^{0.5} \nu^{0.05}\]
+$V_G$: gas velocity (ft/s)
+$\nu$: kinematic viscosity ?
+
+\[\left(\frac{G_L}{G_G}\right)\left(\frac{\rho_G}{\rho_L}\right)\]
+$G_L$: Liquid mass velocity $\pounds m/s\cdot ft^2$
+$G_G$: Gas mass velocity $\pounds m/s\cdot ft^2$
+$G_L = f(G_G)$
+
+\[d(V_y) = d(L_x)\]
+\[dA = aSdz\]
+$a$: interfacial area/volume $m^2/m^3$
+$S$: cross section of column
+$dz$: packing ?
+
+Mass Transfer
+\begin{align}
+N_A dA &= k_y a (y_{AG}-y_{Ai})Sdz\\
+&=k_x a (x_{Ai}-x_{AL}) S dz
+\end{align}
+
+\[\int_0^z dz = \int_{y_2}^{y_1} \frac{Vdy}{k_y a S}
+(y-y_L) = z = \frac{V}{k_y a S} \int_{y_2}^{y_1} \frac{dy}{y-y_i}\]
+\[z = \int_{x_2}^{x_1} \frac{L dx}{k_x a S (x_L - x)} = z
+= \frac{L}{k_A a S} \int_{x_2}^{x^1} \frac{dx}{x_i-x}\]
+
+p641
+\[N_A = k_y (y_{AG}-y_i) = k_x(x_i-x_{AL} = K_y(y_G-y^*) = K_x{x^*-x_L}\]
+where
+\[\frac{1}{K_y} = \frac{1}{k_y} + \frac{m}{k_x}\]
+\begin{align}
+z &= \overbrace{\frac{V}{k_y a S}}^{H_G}
+     \overbrace{\int_{y_2}^{y_1}\frac{dy}{y-yi}}^{N_G}\\
+  &= \underbrace{\frac{V}{K_y a S}}_{H_OG}
+     \underbrace{\int_{y_2}^{y_1}\frac{dy}{y-y^*}}_{N_{OG}}
+\end{align}
+\begin{align}
+z &= \overbrace{\frac{L}{k_x a S}}^{H_L}
+     \overbrace{\int_{x_2}^{x_1}\frac{dx}{x_i-x}}^{N_L}
+  &= \underbrace{\frac{L}{K_x a S}}_{H_{OL}}
+     \underbrace{\int_{x_2}^{x_1}\frac{dx}{x^*-x}}_{N_{OL}}
+\end{align}
+
+If major resistance in gas phase, use $N_{OG}$ or $N_G$ and $N_{OL}$ or $N_L$ if in the liquid phase.
+
+Estimate gas film coefficient (Eq 10.8-1 p686)
+?
+
+
+\end{document}
+
