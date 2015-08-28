@@ -1,0 +1,140 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\begin{document}
+
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+\title{Finite Difference Method}
+\author{Alex Griessman}
+\date{\today}
+\maketitle
+
+\section{Derivation}
+\[\frac{\partial c_A}{\partial t} = D \frac{\partial^2 c_A}{\partial x^2}\]
+\[f'(x) = \frac{f(x+h) - f(x)}{h}\]
+\[f''(x) = \frac{f(x+h)-2f(x)+f(x-h)}{h^2}\]
+\[\frac{c(x,t+\Delta t) - c(x,t)}{\Delta t} = D \frac{c(x+\Delta x, t) - 2c(x,t) + c(x-\Delta x,t)}{(\Delta x)^2}\]
+\[c(x,t+\Delta t) = \frac{D \Delta t}{(\Delta x)^2}\left[ c(x+\Delta x,t) - 2c(x,t)+c(x-\Delta x, t)\right] + c(x,t)\]
+\[ M = \frac{(\Delta x)^2}{D \Delta t}\]
+\[c(x,t+\Delta t) = \frac{1}{M}\left[c(x+\Delta x) + (M-2)c(x,t) + c(x-\Delta x,t)\right]\]
+
+\section{Boundary Conditions}
+\subsection{Convective Boundary Condition}
+\[c(1, t+\Delta t) = \frac{1}{M}\left[2 N c_a(t) + \left[M-(2N+2)\right]c(1,t) + 2c(2,t)\right]\]
+\[N = \frac{k_c \Delta x}{D}\]
+\subsection{Insulated Boundary Condition}
+\[c(f,t+\Delta t) = \frac{1}{M}\left[(M-2)c(f,t) + 2 c(f-1,t)\right]\]
+
+\section{Imposing Initial Conditions at a Boundary}
+For numerical stability, impose a value halfway between the initial condition
+and the value specified at that boundary for the first time step only.
+Afterwards, impose the boundary condition normally.
+\begin{description}
+\item[$t=0$ (initial condition)] $c(f,0) = c_0$
+\item[$t=\Delta t$] $c(f,1) = \frac{c_0+c_b}{2}$
+\item[$t=2\Delta t$] $c(f,2) = c_b$
+\item[$t=3\Delta t$] $c(f,3) = c_b$
+\end{description}
+
+\section{Matlab Implementation}
+For this example, it is assumed that everything will be programmed into a single Matlab script file.
+\subsection{Deleting Old Variables}
+Each time you run a Matlab script, the program saves the value of each variable to the workspace. If you rerun your script, these values can affect your results. To avoid this, simply run the clear command at the beginning of your script.
+\begin{lstlisting}
+clear;
+\end{lstlisting}
+\subsection{Inputing Model Parameters}
+The simplest way to specify parameters for your model is to dedicate a
+portion of your script to just listing variables and assigning them values. By
+doing this all in one section, it becomes easier to see what inputs you're
+using for your equations and to easily modify them if needed. It is important
+to specify any units attached to values your supplying, since having the right
+units is will be important in making sure your calculation results are correct.
+\begin{lstlisting}
+L = .5 % m
+dx = 0.001 % m
+Dab = 1e-10 % m^2/s
+\end{lstlisting}
+
+The next step is to calculate any model parameters that you may need for your
+equations but that were not explicitly stated in the problem statement. For
+example, if $M$ and $\Delta x$ are provided in the problem statement, this
+might be a good time to calculate your time step size, $\Delta t$.
+\begin{lstlisting}
+% Calculate time step size using M=dx^2/(Dab dt)
+dt = dx^2/(Dab M);
+\end{lstlisting}
+
+\subsection{Imposing the Initial Condition}
+The first step when solving a differential equation using finite difference
+method is to specify the initial condition at each point at time $t=0$. In
+order to do this, it is important to have an idea of how you want to store your
+calculated values. An easy way to organize all of the values for a
+one-dimensional problem is to create a single matrix and use the row number to
+indicate which node the value corresponds to, and the column number to specify
+what time step the value was calculated at. Then, in order to obtain the value
+at node 3 at time step 4, you would write:
+\begin{lstlisting}
+value = c(3,4); % Concentration at node #3 and time step #4.
+\end{lstlisting}
+It is important to note that all matrices in Matlab start indexing with 1. So,
+writing c(1,1) would give you the value in the first row and the first column
+of matrix c, and writing c(0,1) would give you an error.
+
+If you are using this storage scheme for your values, then imposing the initial
+condition is easy. Simply create a for loop to set the initial value to the first value in each row.
+
+For loops operate by defining a loop index and a range of values use when
+looping. The first time the loop runs, the loop index assumes the first value
+in the range. Then, on each subsequent iteration the index is increased by the
+specified increment. If no increment is specified, the default is 1.
+In this example, the loop has an index i. The loop will run ten times, and i will have values of 1, 2, 3, ..., 10. Each time the loop runs, it will set the i-th element of a vector to 1.
+\begin{lstlisting}
+for i = 1:10
+    v(i) = 1;
+end
+\end{lstlisting}
+
+\subsection{Calculating Node Values at Each Time Step}
+The simplest way to calculate the values of the nodes at all times is to create
+two for loops -- one inside the other. The outer loop executes its code once
+each time step and keeps track of what step it's on. The inner loop then
+calculates the values of each of the interior nodes. Since boundary conditions
+use a different equation than the interior nodes, they should not be placed in
+the inner-most for loop. Instead, they should come either directly before it or
+directly after it.
+
+\subsection{Outputting Results}
+In order to print out results at a specific node or time step, it is convenient
+to use a shortcut to refer to an entire row or column of a matrix. If when
+accessing values from a matrix, you supply a ":" character instead of a number,
+Matlab assumes you want that entire row or column. So, the following code
+prints the entire third column of matrix A:
+\begin{lstlisting}
+A(:,3)
+\end{lstlisting}
+
+\end{document}
+
